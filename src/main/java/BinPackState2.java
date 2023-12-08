@@ -22,6 +22,8 @@ public class BinPackState2 {
 
     static List<Consumer> assignment = new ArrayList<Consumer>();
     static List<Consumer> currentAssignment = assignment;
+    static List<Consumer> tempAssignment = assignment;
+
 
     private static KafkaConsumer<byte[], byte[]> metadataConsumer;
 
@@ -100,7 +102,9 @@ public class BinPackState2 {
                 Properties props = KafkaConsumerConfig.createProperties(config);
                 metadataConsumer = new KafkaConsumer<>(props);
             }
-            currentAssignment = assignment;
+
+            currentAssignment = tempAssignment;
+           // currentAssignment = assignment;
            // metadataConsumer.enforceRebalance();
 
             action = "REASS";
@@ -166,7 +170,8 @@ public class BinPackState2 {
         }
 
 
-         assignment = consumers;
+        assignment = consumers;
+        tempAssignment = consumers;
         log.info(" The BP up scaler recommended for group {} {}", "testgroup1", consumers.size());
         return consumers.size();
     }
