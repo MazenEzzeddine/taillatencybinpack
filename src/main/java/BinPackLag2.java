@@ -46,7 +46,6 @@ public class BinPackLag2 {
             if (replicasForscale > 0) {
                 //TODO IF and Else IF can be in the same logic
                 log.info("We have to upscale  group1 by {}", replicasForscale);
-                // neededsize=5;
                 BinPackState.size = neededsize;
                 LastUpScaleDecision = Instant.now();
 /*            new Thread(new Runnable() {
